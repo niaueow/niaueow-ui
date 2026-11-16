@@ -11,7 +11,7 @@ Works on Windows (including ARM64), macOS and Linux. All scripts are Node-based,
 ## Setup
 
 ```bash
-git clone https://github.com/<<GITHUB_USERNAME>>/niaueow-ui.git
+git clone https://github.com/niaueow/niaueow-ui.git
 cd niaueow-ui
 pnpm install
 ```

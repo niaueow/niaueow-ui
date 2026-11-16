@@ -12,10 +12,10 @@ Do these in order.
 - Enable 2FA on npm for **authorization and writes**, using an authenticator app or security key.
 
 ### 2. Create the GitHub repository
-1. Create `<<GITHUB_USERNAME>>/niaueow-ui` as a public repo, without a README (the project already has one).
+1. Create `niaueow/niaueow-ui` as a public repo, without a README (the project already has one).
 2. Push:
    ```bash
-   git remote add origin https://github.com/<<GITHUB_USERNAME>>/niaueow-ui.git
+   git remote add origin https://github.com/niaueow/niaueow-ui.git
    git push -u origin main
    ```
 
@@ -42,7 +42,7 @@ Use version `0.0.0` or the initial `0.1.0` changeset version. Run this from a cl
 
 ### 5. Configure trusted publishing
 1. On npmjs.com, open `@niaueow/ui` → **Settings → Trusted Publisher**.
-2. Choose GitHub Actions and enter: owner `<<GITHUB_USERNAME>>`, repository `niaueow-ui`, workflow filename `release.yml`.
+2. Choose GitHub Actions and enter: owner `niaueow`, repository `niaueow-ui`, workflow filename `release.yml`.
 3. Under **Publishing access**, require 2FA and **disallow tokens**, so the only way to publish is the trusted workflow.
 4. Revoke any npm tokens you created.
 

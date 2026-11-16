@@ -6,7 +6,7 @@ A themeable Vue 3 component library built from the niaueow Figma design system. 
 
 - **Storybook:** `<<STORYBOOK_URL>>`
 - **npm:** https://www.npmjs.com/package/@niaueow/ui
-- **Figma:** `<<FIGMA_FILE_URL>>`
+- **Figma:** https://www.figma.com/design/83nCxVpSCw5SFSsoPu4o9Z/niaueow-s-design-system
 
 ## Features
 
@@ -82,21 +82,27 @@ Global registration includes every component in your bundle. Use named imports i
 
 Override any `--n-*` variable in your own CSS. Your values win regardless of import order.
 
+Rebrand by replacing the brand scale. Every brand, info and focus token in light and dark mode follows:
+
 ```css
 :root {
-  --n-primary: var(--color-emerald-600);
-  --n-primary-foreground: white;
-  --n-radius-md: 0.75rem;
-  --n-font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
-}
-
-.dark {
-  --n-primary: var(--color-emerald-400);
-  --n-primary-foreground: var(--color-emerald-950);
+  --n-brand-50: var(--color-emerald-50);
+  --n-brand-100: var(--color-emerald-100);
+  /* ...200 to 800 */
+  --n-brand-900: var(--color-emerald-900);
+  --n-font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
 }
 ```
 
-Fonts are not bundled. Load your font (Google Fonts, `@nuxt/fonts`, self-hosted) and point `--n-font-sans` at it.
+Or change a single role:
+
+```css
+.dark {
+  --n-background-primary: #1a1a1a;
+}
+```
+
+The default font is Plus Jakarta Sans. Fonts are not bundled: load the font (Google Fonts, `@nuxt/fonts`, self-hosted) or point `--n-font-sans` at another one.
 
 Full guide and token reference: [docs/THEMING.md](./docs/THEMING.md).
 
