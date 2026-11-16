@@ -174,7 +174,7 @@ Props, variants and live examples for each component are in Storybook.
 ## Development
 
 ```bash
-git clone https://github.com/<<GITHUB_USERNAME>>/niaueow-ui.git
+git clone https://github.com/niaueow/niaueow-ui.git
 cd niaueow-ui
 pnpm install
 pnpm storybook

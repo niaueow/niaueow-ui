@@ -1,0 +1,15 @@
+node_modules/
+dist/
+storybook-static/
+coverage/
+.nuxt/
+.output/
+pnpm-lock.yaml
+.changeset/*.md
+CHANGELOG.md
+packages/ui/README.md
+packages/ui/LICENSE
+packages/ui/src/styles/tokens.css
+
+# Hand-written docs keep their own formatting
+*.md

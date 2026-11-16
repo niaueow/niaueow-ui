@@ -20,6 +20,8 @@ src/components/<kebab-name>/
 
 `index.ts` exports the component and its prop types. The component is re-exported from `src/index.ts` and registered in `src/plugin.ts`. `pnpm new <Name>` does all of this.
 
+Relative imports in `.ts` files use the `.js` extension (`from './plugin.js'`, `from './components/button/index.js'`). TypeScript and Vite resolve it to the `.ts` source, and the emitted `.d.ts` files then resolve for consumers using Node ESM resolution. `pnpm check:package` fails without it.
+
 ## Naming
 
 - Component: `N` + PascalCase (`NButton`, `NDropdownMenu`).

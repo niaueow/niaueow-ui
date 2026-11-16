@@ -23,18 +23,22 @@ Guidance for Claude Code sessions in this repository. Read this first, then the 
 
 ```bash
 pnpm install          # install (frozen lockfile in CI)
-pnpm storybook        # Storybook dev server
-pnpm dev:vue          # Vue playground
-pnpm dev:nuxt         # Nuxt playground
-pnpm tokens           # regenerate src/styles/tokens.css from Figma export
-pnpm tokens:contrast  # WCAG contrast check on semantic pairs
-pnpm new <Name>       # scaffold a component
 pnpm lint
+pnpm format
 pnpm typecheck
 pnpm test
 pnpm build
 pnpm check:package    # publint + attw
+pnpm changeset        # record a change for the next release
 pnpm verify           # everything CI runs; must pass before you finish
+
+# Not yet available:
+pnpm tokens           # regenerate src/styles/tokens.css from Figma export (added in M2)
+pnpm tokens:contrast  # WCAG contrast check on semantic pairs (added in M2)
+pnpm storybook        # Storybook dev server (added in M3)
+pnpm dev:vue          # Vue playground (added in a later milestone)
+pnpm dev:nuxt         # Nuxt playground (added in a later milestone)
+pnpm new <Name>       # scaffold a component (added in M5)
 ```
 
 ## Hard rules

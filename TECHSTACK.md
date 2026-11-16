@@ -11,7 +11,7 @@ This document lists every tool in `@niaueow/ui`, what it does here, and why it w
 | Styling | Tailwind CSS v4 |
 | Headless primitives | Reka UI |
 | Variants and class merging | class-variance-authority (or tailwind-variants), tailwind-merge, clsx |
-| Build | Vite (library mode), vue-tsc / vite-plugin-dts |
+| Build | Vite (library mode), vue-tsc |
 | Documentation | Storybook (Vue 3 + Vite) |
 | Testing | Vitest, @vue/test-utils, Storybook Vitest integration, axe |
 | Linting and formatting | ESLint (flat config), eslint-plugin-vue, typescript-eslint, Prettier |
@@ -30,6 +30,8 @@ The target framework for every project that uses this library. Vue 3.5+ is requi
 
 ### TypeScript
 Every component exports its prop types, so consumers get autocomplete for `variant`, `size` and other props. `strict: true` catches mistakes before they ship.
+
+Exception to the latest-stable policy: TypeScript is pinned to `~6.0` because typescript-eslint supports `<6.1.0`. Move to TypeScript 7 once typescript-eslint and vue-tsc support it.
 
 ### Tailwind CSS v4
 Components are styled with Tailwind utilities. v4 defines the theme in CSS (`@theme`), which means design tokens are plain CSS variables at runtime and can be overridden per project without rebuilding the library.
@@ -54,8 +56,8 @@ These four packages are the entire runtime dependency budget. Adding another run
 ### Vite (library mode)
 Builds ESM output with one module per source file (`preserveModules`), so bundlers can tree-shake unused components. `vue`, `reka-ui` and other dependencies are externalized, not bundled.
 
-### vue-tsc / vite-plugin-dts
-Generates `.d.ts` files from `.vue` and `.ts` sources. Type output is checked with `@arethetypeswrong/cli`.
+### vue-tsc
+Generates `.d.ts` files from `.vue` and `.ts` sources (`vue-tsc -p tsconfig.build.json`) and runs `pnpm typecheck`. Chosen over vite-plugin-dts because it is the official Vue type checker and needs no extra plugin. Type output is checked with `@arethetypeswrong/cli`.
 
 ### CSS output
 `dist/styles.css` is copied from source without running Tailwind on it. It keeps the `@theme`, `@custom-variant`, `@layer` and `@source` directives so the consumer's Tailwind compiles them together with the app's own classes.

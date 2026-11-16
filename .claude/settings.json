@@ -1,0 +1,73 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "permissions": {
+    "deny": [
+      "Read(.env*)",
+      "Read(~/.npmrc)",
+
+      "Bash(npm publish *)",
+      "Bash(npm * publish)",
+      "Bash(npm * publish *)",
+      "Bash(npm unpublish *)",
+      "Bash(npm deprecate *)",
+      "Bash(npm dist-tag *)",
+      "Bash(npm owner *)",
+      "Bash(npm login *)",
+      "Bash(npm adduser *)",
+      "Bash(npm token *)",
+      "Bash(pnpm publish *)",
+      "Bash(pnpm * publish)",
+      "Bash(pnpm * publish *)",
+      "Bash(* changeset publish)",
+      "Bash(* changeset publish *)",
+      "Bash(* @changesets/cli publish)",
+      "Bash(* @changesets/cli publish *)",
+      "Bash(git push *)",
+      "Bash(git * push)",
+      "Bash(git * push *)",
+      "Bash(sh *)",
+      "Bash(bash *)",
+      "Bash(zsh *)",
+      "Bash(sudo *)",
+
+      "PowerShell(npm publish *)",
+      "PowerShell(npm * publish)",
+      "PowerShell(npm * publish *)",
+      "PowerShell(npm unpublish *)",
+      "PowerShell(npm deprecate *)",
+      "PowerShell(npm dist-tag *)",
+      "PowerShell(npm owner *)",
+      "PowerShell(npm login *)",
+      "PowerShell(npm adduser *)",
+      "PowerShell(npm token *)",
+      "PowerShell(pnpm publish *)",
+      "PowerShell(pnpm * publish)",
+      "PowerShell(pnpm * publish *)",
+      "PowerShell(* changeset publish)",
+      "PowerShell(* changeset publish *)",
+      "PowerShell(* @changesets/cli publish)",
+      "PowerShell(* @changesets/cli publish *)",
+      "PowerShell(git push *)",
+      "PowerShell(git * push)",
+      "PowerShell(git * push *)",
+      "PowerShell(iex *)",
+      "PowerShell(Invoke-Expression *)",
+      "PowerShell(powershell *)",
+      "PowerShell(pwsh *)"
+    ]
+  },
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"${CLAUDE_PROJECT_DIR}/.claude/hooks/format.mjs\"",
+            "timeout": 30
+          }
+        ]
+      }
+    ]
+  }
+}

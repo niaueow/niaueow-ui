@@ -22,6 +22,7 @@ Do these in order.
 ### 3. Repository settings
 - **Settings → Code security:** enable Dependabot alerts, Dependabot security updates, secret scanning and push protection, and **private vulnerability reporting**.
 - **Settings → Actions → General:** workflow permissions set to *Read repository contents*; allow GitHub Actions to create pull requests (needed for the Changesets version PR).
+- **Settings → Environments → New environment `npm-publish`:** under *Deployment branches and tags* choose *Selected branches* and add `main` only. Optionally add yourself as a required reviewer so every publish waits for your approval. The release workflow's `publish` job runs in this environment.
 - **Settings → Branches → Add rule for `main`** (or a ruleset):
   - require a pull request before merging
   - require status checks to pass (select the CI jobs)
@@ -42,7 +43,7 @@ Use version `0.0.0` or the initial `0.1.0` changeset version. Run this from a cl
 
 ### 5. Configure trusted publishing
 1. On npmjs.com, open `@niaueow/ui` → **Settings → Trusted Publisher**.
-2. Choose GitHub Actions and enter: owner `niaueow`, repository `niaueow-ui`, workflow filename `release.yml`.
+2. Choose GitHub Actions and enter: owner `niaueow`, repository `niaueow-ui`, workflow filename `release.yml`, environment `npm-publish`. Setting the environment means a branch that edits the workflow cannot publish, because the environment only allows `main`. The `repository.url` in `packages/ui/package.json` must match this repository exactly, and a new trusted publisher configuration must complete its first publish within 2 days or it expires. Trusted publishing needs npm CLI 11.5.1+ and Node 22.14+; the release workflow uses the Node version in `.nvmrc`.
 3. Under **Publishing access**, require 2FA and **disallow tokens**, so the only way to publish is the trusted workflow.
 4. Revoke any npm tokens you created.
 
@@ -68,7 +69,7 @@ Releases run through Changesets and `.github/workflows/release.yml`.
 
 1. Every PR that changes the published package includes a changeset (`pnpm changeset`).
 2. When PRs merge to `main`, the release workflow opens or updates a **Version Packages** PR. It bumps the version and writes `CHANGELOG.md`.
-3. Review that PR. When you merge it, the workflow runs `pnpm verify`, builds, and publishes to npm with provenance through trusted publishing.
+3. Review that PR. When you merge it, the workflow's `pack` job runs `pnpm verify` and packs the tarball, and the `publish` job publishes it to npm with provenance through trusted publishing. Only the `publish` job has `id-token: write`, and it runs no project build.
 4. Check the release:
    ```bash
    npm view @niaueow/ui version
@@ -87,7 +88,7 @@ Versioning policy: [ROADMAP.md](../ROADMAP.md#versioning-policy).
 - Dependabot opens weekly grouped PRs for npm and GitHub Actions.
 - CI must pass. Read the changelog for anything touching Vue, Tailwind, Reka UI, Vite or Storybook.
 - pnpm's minimum release age means very new versions are skipped until they have aged; this is intentional.
-- When adding a dependency that needs an install script, add it to the pnpm build-script allowlist only after checking what the script does.
+- When adding a dependency that needs an install script, add it to the pnpm build-script allowlist (`allowBuilds` in `pnpm-workspace.yaml`) only after checking what the script does. An unreviewed build script fails the install.
 - GitHub Actions stay pinned to commit SHAs; Dependabot updates the SHA and the version comment together.
 
 ## Security advisories

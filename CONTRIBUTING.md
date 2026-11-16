@@ -2,8 +2,12 @@
 
 ## Prerequisites
 
-- Node.js LTS (version in `.nvmrc`)
-- pnpm (version in the root `package.json` `packageManager` field)
+- Node.js LTS (version in `.nvmrc`). On Windows ARM64, install the native `arm64` build (`nvm install <version> arm64`), not x64.
+- pnpm (version in the root `package.json` `packageManager` field). Install that exact version globally with its install script allowed, so its native binary is linked:
+  ```bash
+  npm install -g pnpm@<version> --allow-scripts=pnpm
+  ```
+  A global pnpm 11 older than 11.28.4 that switches itself to the pinned version leaves a broken shim on Windows ([pnpm#16594](https://github.com/pnpm/pnpm/issues/16594)).
 - Git
 
 Works on Windows (including ARM64), macOS and Linux. All scripts are Node-based, so PowerShell and Git Bash both work.
@@ -22,19 +26,20 @@ Run from the repo root.
 
 | Command | What it does |
 |---|---|
-| `pnpm storybook` | Start Storybook at http://localhost:6006 |
-| `pnpm dev:vue` | Run the Vite + Vue playground |
-| `pnpm dev:nuxt` | Run the Nuxt playground |
-| `pnpm build` | Build the library to `packages/ui/dist` |
-| `pnpm tokens` | Regenerate `tokens.css` from the Figma export |
-| `pnpm tokens:contrast` | Check WCAG contrast of semantic color pairs |
-| `pnpm new <Name>` | Scaffold a new component |
 | `pnpm lint` / `pnpm format` | Lint / format |
 | `pnpm typecheck` | Type-check all packages |
 | `pnpm test` | Unit, interaction and a11y tests with coverage |
+| `pnpm build` | Build the library to `packages/ui/dist` |
 | `pnpm check:package` | publint + arethetypeswrong on the built package |
-| `pnpm build-storybook` | Build static Storybook |
+| `pnpm changeset` | Record a change for the next release |
 | `pnpm verify` | Everything CI runs, in the same order |
+| `pnpm tokens` | Regenerate `tokens.css` from the Figma export (added in M2) |
+| `pnpm tokens:contrast` | Check WCAG contrast of semantic color pairs (added in M2) |
+| `pnpm storybook` | Start Storybook at http://localhost:6006 (added in M3) |
+| `pnpm build-storybook` | Build static Storybook (added in M3) |
+| `pnpm dev:vue` | Run the Vite + Vue playground (added in a later milestone) |
+| `pnpm dev:nuxt` | Run the Nuxt playground (added in a later milestone) |
+| `pnpm new <Name>` | Scaffold a new component (added in M5) |
 
 Run `pnpm verify` before opening a pull request.
 

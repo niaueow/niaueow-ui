@@ -1,0 +1,13 @@
+packages:
+  - packages/*
+  - playgrounds/*
+
+# Supply-chain settings. See docs/MAINTAINING.md before changing.
+
+# Do not install a dependency version until it is at least 3 days old (minutes).
+minimumReleaseAge: 4320
+
+# Dependency lifecycle scripts are blocked by default and an unreviewed build
+# script fails the install (strictDepBuilds defaults to true). Allow a package
+# here only after reading what its script does.
+allowBuilds: {}

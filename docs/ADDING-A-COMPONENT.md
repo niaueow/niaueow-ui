@@ -51,7 +51,7 @@ src/components/avatar/
 ```
 
 and also:
-- adds `export * from './components/avatar'` to `src/index.ts`
+- adds `export * from './components/avatar/index.js'` to `src/index.ts`
 - registers `NAvatar` in `src/plugin.ts`
 - creates a changeset stub `feat: add NAvatar`
 

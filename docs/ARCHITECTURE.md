@@ -42,7 +42,7 @@ niaueow-ui/
 ├─ packages/
 │  └─ ui/                       The published package
 │     ├─ .storybook/            Storybook config
-│     ├─ scripts/               build-tokens.ts, check-contrast.ts, new-component.ts
+│     ├─ scripts/               copy-assets.mjs, build-tokens.ts, check-contrast.ts, new-component.ts
 │     ├─ tokens/figma/          Raw Figma export (input, committed)
 │     ├─ stories/               MDX foundations pages
 │     └─ src/
@@ -55,6 +55,7 @@ niaueow-ui/
 ├─ playgrounds/
 │  ├─ vue/                      Vite + Vue consumer app
 │  └─ nuxt/                     Nuxt consumer app (SSR check)
+├─ scripts/verify.mjs           `pnpm verify`: every CI check in order, stops at the first failure
 ├─ CLAUDE.md
 ├─ CONTRIBUTING.md
 ├─ README.md
@@ -104,6 +105,8 @@ dist/
 - ESM only.
 - `preserveModules` keeps one output module per source file for tree-shaking.
 - `vue`, `reka-ui`, `class-variance-authority`, `tailwind-merge` and `clsx` are external.
+- `.d.ts` files are emitted by `vue-tsc` (`tsconfig.build.json`), one per module.
+- `scripts/copy-assets.mjs` copies `src/styles/index.css` to `dist/styles.css` unprocessed, and copies the repo root `README.md` and `LICENSE` into `packages/ui/` so npm ships them. The copies are gitignored; the root files are the source.
 
 ## Package exports
 

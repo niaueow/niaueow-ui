@@ -1,0 +1,36 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+storybook-static/
+coverage/
+*.tsbuildinfo
+
+# Nuxt
+.nuxt/
+.output/
+
+# Environment and secrets
+.env*
+
+# Copied into the package at build time from the repo root
+packages/ui/README.md
+packages/ui/LICENSE
+
+# Logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editors
+.vscode/*
+!.vscode/extensions.json
+.idea/
+*.swp
+*~
